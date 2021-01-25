@@ -78,3 +78,28 @@ np.savetxt("vdW_Hes.hes", vdW_hes)
 np.savetxt("diff.hes", vib.H-vdW_hes)
 
 write("relaxed_0003.in", atoms, format="aims")
+
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
+
+fig, ax = plt.subplots()
+im = ax.imshow(vib.H-vdW_hes)
+plt.colorbar(im)
+# im, cbar = heatmap(vib.H-vdW_hes, ax=ax, cmap="YlGn", cbarlabel="difference")
+# We want to show all ticks...
+# ax.set_xticks(np.arange(len(farmers)))
+# ax.set_yticks(np.arange(len(vegetables)))
+# ... and label them with the respective list entries
+# ax.set_xticklabels(farmers)
+# ax.set_yticklabels(vegetables)
+
+# Rotate the tick labels and set their alignment.
+# plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+         # rotation_mode="anchor")
+
+ax.set_title("Difference in the Hessians")
+fig.tight_layout()
+plt.savefig("diff.png", dpi=300)
+plt.show()
